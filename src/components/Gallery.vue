@@ -21,12 +21,16 @@
                 <button @click="moreImages">Add more</button>
                 <button @click="testButton">test</button>  
             </div>
+            <Trigger @triggerIntersected="infiniteScroll" />
         </div>
 </template>
 
 
 <script>
+
+
 import Images from './Images.vue'
+import Trigger from './Trigger.vue'
 
 export default {
     
@@ -39,9 +43,10 @@ export default {
             data: {},
             imageList: {},
             listLength: 0,
-            toReturn: 20,
+            toReturn: 25,
             count: 0,
-            after: ''
+            after: '',
+            isSearched: false
         }
     },
     computed: {
@@ -56,6 +61,9 @@ export default {
         },
         searchUrl() {
             return `https://www.reddit.com/r/multiwall+wallpapers+wallpaper/search.json?q=${this.searchValueFormatted}&limit=${this.toReturn}&restrict_sr=on&sort=relevance&t=all`
+        },
+        searchMoreUrl() {
+            return `https://www.reddit.com/r/multiwall+wallpapers+wallpaper/search.json?q=${this.searchValueFormatted}&limit=${this.toReturn}&after=${this.after}`
         }
     },
     methods: {
@@ -76,8 +84,9 @@ export default {
                 this.count += this.toReturn;
                 
                 this.$forceUpdate(); 
-                
-            });      
+
+            });
+               
         },
         moreImages() {
             fetch(this.getMoreUrl)
@@ -110,23 +119,103 @@ export default {
                 var listLength = data.data.children.length;
                 this.listLength = listLength;
 
-                this.imageList[i] = data.data.children[i];
+                for(var i = 0; i < listLength; i++ ) {                
+                  this.imageList[i] = data.data.children[i];
+                }
                 
                 this.after = data.data.after;
                 this.count += this.toReturn;
+                this.isSearched = true;
                 this.$forceUpdate(); 
             });      
         },
+        searchMoreImages() {
+            fetch(this.searchMoreUrl)
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                this.data = data;
+                var listLength = data.data.children.length;
+                this.listLength += listLength;
+                
+                for(var i = 0; i < listLength; i++) {                
+                  this.imageList[(i + this.count)] = data.data.children[i];
+                }
+                this.after = data.data.after;
+                this.count += this.toReturn;
+                this.$forceUpdate(); 
+            });
+        },
         testButton() {
             console.log(this.getMoreUrl);
+        },
+        obs() {
+            var watchApp = document.querySelector('.checker');
+
+            var options = {
+            root: null,
+            threshold: 0,
+            rootMargin: '10px'
+            }
+
+            var observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if(!entry.isIntersecting) {
+                return;
+                }
+                console.log(this.$refs);
+                // $vm.$children[0].$children[0].moreImages();
+                
+            });
+            }, options);
+
+            setTimeout(function() {
+            observer.observe(watchApp);
+            }, 1000);
+        },
+        infiniteScroll() {
+            if (this.isSearched) {
+                this.searchMoreImages();
+                console.log('searched');
+            } else {
+                this.moreImages();
+                console.log('normal');
+            }
         }
     },
-    beforeMount() {
-        this.fetchJSON();  
+    mounted() {
+        this.fetchJSON();
+         
     },
     components: {
-        Images
+        Images,
+        Trigger
     }
     
 }
+// setTimeout(function() {
+// var watchApp = document.querySelector('.checker');
+
+// var options = {
+// root: null,
+// threshold: 0,
+// rootMargin: '10px'
+// }
+
+//     var observer = new IntersectionObserver(function(entries, observer) {
+//         entries.forEach(entry => {
+//             if(!entry.isIntersecting) {
+//             return;
+//             }
+//             console.log(this.$refs);
+//             //wallpapers.$children[0].$children[0].moreImages();
+            
+//         });
+//     }, options);
+
+
+
+// observer.observe(watchApp);
+// }, 1000);
 </script>

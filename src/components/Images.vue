@@ -47,7 +47,7 @@ export default {
         },
         newSrc: function() {
             if(this.isImgur && !this.isAlbum && !this.isGallery) {
-                if(!this.daImage.includes('.jpg')) {
+                if(!this.daImage.includes('.jpg') && !this.daImage.includes('.png')) {
                     return this.daImage.replace('imgur.com', 'i.imgur.com') + '.jpg';
                 } else {
                     return this.daImage;

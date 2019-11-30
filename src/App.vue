@@ -4,7 +4,7 @@
     <div class="">     
            
         <Gallery></Gallery>
-      
+        
     </div>
       
       
@@ -16,6 +16,7 @@
 <script>
 import Images from './components/Images.vue'
 import Gallery from './components/Gallery.vue'
+import Trigger from './components/Trigger.vue'
 
 export default {
   
@@ -29,14 +30,21 @@ export default {
   },
   components: {
     Images,
-    Gallery
+    Gallery,
+    Trigger
   }
 }
+
+
+
+
 </script>
 
 <style>
 body {
   background: #2c3e50;
+  min-height: 200vh;
+  position: relative;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
