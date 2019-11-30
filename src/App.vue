@@ -1,10 +1,8 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <div class="">
-      
-              
-        
+    <div class="">     
+           
         <Gallery></Gallery>
       
     </div>
@@ -48,6 +46,8 @@ body {
   color: #2c3e50;
   margin-top: 60px;
   /* background: black; */
+  width: 98%;
+  margin: 0 auto;
 }
 
 h1, h2 {
