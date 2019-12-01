@@ -10,17 +10,15 @@
                         </div>
                     </div>
                 </div>
-            </div>      
-            <Images v-for="(image, index) in imageList"
-            :key="index"
-            :daImage="image.data.url"
-            :daAlt="image.data.title"
-            :daDomain="image.data.domain"
-            ></Images>
-            <div class="col-12">
+            </div> 
+            <!-- <div class="col-12">
                 <button @click="moreImages">Add more</button>
                 <button @click="testButton">test</button>  
-            </div>
+            </div>    -->
+            <Images v-for="(image, index) in imageList"
+            :key="index"            
+            :allData="image.data"
+            ></Images>            
             <Trigger @triggerIntersected="infiniteScroll" />
         </div>
 </template>
@@ -51,19 +49,27 @@ export default {
     },
     computed: {
         searchValueFormatted() {
-            return this.searchValue.replace(' ', '+');
+            //return this.searchValue.replace(' ', '+');
+            return this.searchValue.split(" ").join("+").trim();
         },
         fetchUrl() {
-            return `https://www.reddit.com/r/multiwall+wallpapers+wallpaper.json?limit=${this.toReturn}`
+            return `https://www.reddit.com/user/coopster81/m/wallpapers.json?limit=${this.toReturn}&raw_json=1`
         },
         getMoreUrl() {
-            return `https://www.reddit.com/r/multiwall+wallpapers+wallpaper.json?limit=${this.toReturn}&after=${this.after}`
+            return `https://www.reddit.com/user/coopster81/m/wallpapers.json?limit=${this.toReturn}&after=${this.after}&raw_json=1`
         },
         searchUrl() {
-            return `https://www.reddit.com/r/multiwall+wallpapers+wallpaper/search.json?q=${this.searchValueFormatted}&limit=${this.toReturn}&restrict_sr=on&sort=relevance&t=all`
+            return `https://www.reddit.com/user/coopster81/m/wallpapers/search.json?q=${this.searchValueFormatted}&limit=${this.toReturn}&restrict_sr=on&sort=relevance&t=all&raw_json=1`
         },
         searchMoreUrl() {
-            return `https://www.reddit.com/r/multiwall+wallpapers+wallpaper/search.json?q=${this.searchValueFormatted}&limit=${this.toReturn}&after=${this.after}`
+            return `https://www.reddit.com/user/coopster81/m/wallpapers/search.json?q=${this.searchValueFormatted}&limit=${this.toReturn}&after=${this.after}&restrict_sr=on&sort=relevance&t=all&raw_json=1`
+        },
+        isAfter() {
+            if (this.after) {
+                return true;
+            } else {
+                return false;
+            }
         }
     },
     methods: {
@@ -146,33 +152,10 @@ export default {
                 this.count += this.toReturn;
                 this.$forceUpdate(); 
             });
+            console.log(this.searchMoreUrl);
         },
         testButton() {
-            console.log(this.getMoreUrl);
-        },
-        obs() {
-            var watchApp = document.querySelector('.checker');
-
-            var options = {
-            root: null,
-            threshold: 0,
-            rootMargin: '10px'
-            }
-
-            var observer = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if(!entry.isIntersecting) {
-                return;
-                }
-                console.log(this.$refs);
-                // $vm.$children[0].$children[0].moreImages();
-                
-            });
-            }, options);
-
-            setTimeout(function() {
-            observer.observe(watchApp);
-            }, 1000);
+            console.log(this.searchUrl);
         },
         infiniteScroll() {
             if (this.isSearched) {
@@ -194,28 +177,4 @@ export default {
     }
     
 }
-// setTimeout(function() {
-// var watchApp = document.querySelector('.checker');
-
-// var options = {
-// root: null,
-// threshold: 0,
-// rootMargin: '10px'
-// }
-
-//     var observer = new IntersectionObserver(function(entries, observer) {
-//         entries.forEach(entry => {
-//             if(!entry.isIntersecting) {
-//             return;
-//             }
-//             console.log(this.$refs);
-//             //wallpapers.$children[0].$children[0].moreImages();
-            
-//         });
-//     }, options);
-
-
-
-// observer.observe(watchApp);
-// }, 1000);
 </script>
