@@ -1,14 +1,31 @@
 <template>
-    <div 
+    <!-- <div 
     class="col-12 col-md-4 my-3 d-flex justify-content-center m-height" 
     v-if="(hasPreview && !isRequest)"
     >
         <img 
         :src="preview" 
         :alt="altText" 
-        :data-domain="daDomain" 
+        :data-domain="domain"
+        :data-source="source"
         class="img-props contain">
-    </div>        
+    </div> -->
+    
+    <div 
+    class="m-3 d-flex justify-content-center m-height" 
+    v-if="(hasPreview && !isRequest)"
+    >
+        <transition name="imageFade">
+            <img
+            :show="false"
+            :src="preview" 
+            :alt="altText" 
+            :data-domain="domain"
+            :data-source="source"
+            class="img-props scale-down opacity">
+        </transition>
+    </div>
+           
 </template>
 
 <style>
@@ -17,9 +34,17 @@
     .cover {object-fit: cover !important;}
     .scale-down {object-fit: scale-down !important;}
     .none {object-fit: none !important;}
-    .m-height {max-height: 300px !important;}
-    .img-props {max-height: 100% !important; max-width: 100% !important;}
-    .container-bg {background: grey;}    
+    .m-height {height: 200px !important; max-width: calc(100% * (1/4));}
+    .img-props {max-height: 100% !important; max-width: 100% !important;transition: all .6s ease-in-out;}
+    .container-bg {background: grey;}
+
+
+    .opacity {
+        opacity: 0;
+    }
+    
+
+    
 </style>
 
 
@@ -35,7 +60,14 @@ export default {
     
   
     methods: {
-        
+        afterEnter: function(el) {
+            console.log(el);
+            el.classList.add('image-fade')
+        },
+        enter: function(el) {
+            console.log(el);
+            el.classList.add('image-fade-op')
+        }
     },
     computed: {
         test: function() {

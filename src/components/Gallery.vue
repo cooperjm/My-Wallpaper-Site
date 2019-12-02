@@ -1,5 +1,5 @@
 <template>
-        <div class="row gallery">
+        <div class="row gallery d-flex flex-row justify-content-around">
             <div class="col-12">
                 <div class="row">
                     <div class="input-group mb-3 col-11 col-md-9 col-lg-6 mx-auto">
@@ -165,11 +165,25 @@ export default {
                 this.moreImages();
                 console.log('normal');
             }
+        },
+        checkFade() {
+            setTimeout(function() {
+                var images = document.querySelectorAll('.opacity');
+                images.forEach(function (item, index) {
+                    console.dir(item);
+                    item.style.opacity = '1';
+                    console.dir(item);
+                });
+            }, 600);
+            
         }
     },
     mounted() {
         this.fetchJSON();
-         
+        this.checkFade();
+    },
+    updated() {
+        this.checkFade();
     },
     components: {
         Images,
@@ -178,3 +192,8 @@ export default {
     
 }
 </script>
+<style>
+.full-opacity {
+    opacity: 1;
+}
+</style>
