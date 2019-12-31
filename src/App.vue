@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <!-- <img src="./assets/logo.png"> -->
     <div class="">     
            
         <Gallery></Gallery>
-        
+        <Modal></Modal>
     </div>
       
       
@@ -14,12 +14,14 @@
 </template>
 
 <script>
+
+
 import Images from './components/Images.vue'
 import Gallery from './components/Gallery.vue'
 import Trigger from './components/Trigger.vue'
+import Modal from './components/Modal.vue'
 
 export default {
-  
   data() {
     return {
       
@@ -31,7 +33,11 @@ export default {
   components: {
     Images,
     Gallery,
-    Trigger
+    Trigger,
+    Modal
+  },
+  beforeMount() {
+    this.$store.dispatch('getImages');
   }
 }
 

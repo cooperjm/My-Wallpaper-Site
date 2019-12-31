@@ -1,29 +1,18 @@
 <template>
-    <!-- <div 
-    class="col-12 col-md-4 my-3 d-flex justify-content-center m-height" 
-    v-if="(hasPreview && !isRequest)"
+    
+    <div 
+    class="m-3 d-flex justify-content-center m-height" 
+    v-if="(hasPreview && !isRequest && modalImage)"
     >
-        <img 
+        
+        <img
+        @click="clicked"
         :src="preview" 
         :alt="altText" 
         :data-domain="domain"
         :data-source="source"
-        class="img-props contain">
-    </div> -->
-    
-    <div 
-    class="m-3 d-flex justify-content-center m-height" 
-    v-if="(hasPreview && !isRequest)"
-    >
-        <transition name="imageFade">
-            <img
-            :show="false"
-            :src="preview" 
-            :alt="altText" 
-            :data-domain="domain"
-            :data-source="source"
-            class="img-props scale-down opacity">
-        </transition>
+        class="img-props contain opacity">
+        
     </div>
            
 </template>
@@ -34,7 +23,8 @@
     .cover {object-fit: cover !important;}
     .scale-down {object-fit: scale-down !important;}
     .none {object-fit: none !important;}
-    .m-height {height: 200px !important; max-width: calc(100% * (1/4));}
+    /* .m-height {height: 200px !important; max-width: calc(100% * (1/4));} */
+    .m-height {max-height: 300px !important; flex-basis: 22%;}
     .img-props {max-height: 100% !important; max-width: 100% !important;transition: all .6s ease-in-out;}
     .container-bg {background: grey;}
 
@@ -43,7 +33,17 @@
         opacity: 0;
     }
     
+    @media only screen and (max-width: 723px) {
+        .m-height {
+            flex-basis: 100%;
+        }
+    }
 
+    @media only screen and (max-width: 1252px) and (min-width: 723px) {
+        .m-height {
+            flex-basis: 40%;
+        }
+    }
     
 </style>
 
@@ -62,11 +62,20 @@ export default {
     methods: {
         afterEnter: function(el) {
             console.log(el);
-            el.classList.add('image-fade')
+            //el.classList.add('image-fade')
         },
         enter: function(el) {
             console.log(el);
-            el.classList.add('image-fade-op')
+            //el.classList.add('image-fade-op')
+        },
+        clicked: function() {
+            let extras = {
+                source: this.source,
+                alt: this.altText,
+                modalImage: this.modalImage
+            }
+            this.$store.dispatch('sendImageClick', extras);
+            this.$store.dispatch('modalOpen');
         }
     },
     computed: {
@@ -83,6 +92,13 @@ export default {
         preview: function() {
             if (this.hasPreview) {
                 return this.allData.preview.images[0].resolutions[3].url;
+            } else {
+                return false;
+            }
+        },
+        modalImage: function() {
+            if (this.hasPreview) {
+                return this.allData.preview.images[0].resolutions[5].url;
             } else {
                 return false;
             }

@@ -11,6 +11,7 @@ export default {
                 return {
                     root: null,
                     threshold: "0",
+                    rootMargin: '600px'
                 }
             }
         }
