@@ -7,15 +7,17 @@
                 <img class="theImage" 
                 :src="modalImage" 
                 :alt="alt"
-                >                
+                >
+                <div class="modalButtons">
+                    <a :href="url" target="_blank">
+                        <img id="download" src="..\assets\download.svg" alt="download" title="View">
+                    </a>
+                    <img id="close" src="..\assets\close.svg" alt="close" title="Close"
+                    @click="closeClicked"
+                    >
+                </div>             
             </div>
-            <div class="modalButtons">
-                <a :href="url" target="_blank">
-                    <img id="download" src="..\assets\download.svg" alt="download" title="View">
-                </a>
-                <img id="close" src="..\assets\close.svg" alt="close" title="Close"
-                @click="closeClicked">
-            </div>
+            
         </div>
     </div>
 </template>
@@ -25,12 +27,19 @@ export default {
     
     data() {
         return {
-            
+          buttonContainerWidth: 0,
+          loadingIcon: '/dist/load.gif'
         }
     },
     methods: {
         closeClicked: function() {
             this.$store.dispatch('modalOpen');
+            // This is to insert the loading icon after the modal has closed.
+            // Inside setTimeout was out of scope for "this", which is why self is equal to "this"
+            let self = this;
+            setTimeout(function() {                
+                self.$store.dispatch('insertLoadingIcon', self.loadingIcon);
+            }, 200);                     
         }
     },
     computed: {
@@ -103,10 +112,10 @@ export default {
 .modalButtons {
     /* background-color: white; */
     display: flex;
-    justify-content: flex-end;  
+    justify-content: center;  
     width: 100%;
     padding-top: 15px;    
-    padding-bottom: 25px; /* created a overflow-x issue. fixed with hidding overflow-x on body. will look at later. */
+    padding-bottom: 15px; /* created a overflow-x issue. fixed with hidding overflow-x on body. will look at later. */
     width: 90vw;
 }
 

@@ -13,7 +13,8 @@ export const store = new Vuex.Store({
         initalUrl: 'https://www.reddit.com/user/coopster81/m/wallpapers.json?limit=30&raw_json=1',
         imageClicked: false,
         clickedImageInfo: {},
-        modalOpen: false
+        modalOpen: false,
+        theModalImage: ''
     },
     getters: {
         arrayOfImages(state) {             
@@ -29,7 +30,7 @@ export const store = new Vuex.Store({
             return state.modalOpen;
         },
         modalImage(state) {
-            return state.clickedImageInfo.modalImage;
+            return state.theModalImage;
         }
     },
     mutations: {
@@ -69,9 +70,13 @@ export const store = new Vuex.Store({
         imageWasClicked(state, payload) {
             state.imageClicked = true;
             state.clickedImageInfo = payload;
+            state.theModalImage = payload.modalImage;
         },
         modalOpen(state) {
             state.modalOpen = !state.modalOpen;
+        },
+        insertLoadingIcon(state, payload) {
+            state.theModalImage = payload;
         }
     },
     actions: {
@@ -89,6 +94,9 @@ export const store = new Vuex.Store({
         },
         clearListOfImages(context) {
             context.commit('clearListOfImages');
+        },
+        insertLoadingIcon(context, payload) {
+            context.commit('insertLoadingIcon', payload);
         }
     }
 });

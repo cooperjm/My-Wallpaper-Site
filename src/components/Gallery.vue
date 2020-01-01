@@ -169,7 +169,7 @@ export default {
 .modalOpenBlur {
     filter: blur(8px) grayscale(50%);
     overflow: hidden;
-    transform: scale(.98);    
+    /* transform: scale(.98);     */
 }
 .gallery {
     max-width: 1300px;
@@ -199,12 +199,10 @@ export default {
     
 }
 
-@media only screen and (max-width: 1024px) {
+/* @media only screen and (max-width: 1024px) {
     .modalOpenBlur {
-        filter: blur(8px) grayscale(50%);
-        overflow: hidden;
         transform: scale(1);    
     }
-}
+} */
 
 </style>
