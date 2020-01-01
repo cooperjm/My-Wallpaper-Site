@@ -2,7 +2,9 @@
         <div class="row gallery d-flex flex-row flex-wrap justify-content-around mt-5"
         :class="{modalOpenBlur: modalOpen}"
         >
-            
+            <div class="col-12">
+                <h1 class="galleryHeader">Wallpapers</h1>
+            </div>   
             <!-- <div class="col-12">
                 <div class="row">
                     <div class="input-group mb-3 col-11 col-md-9 col-lg-6 mx-auto">
@@ -146,6 +148,7 @@ export default {
         }
     },
     mounted() {
+        this.$store.dispatch('getMoreImages');
         //this.fetchJSON();
         this.checkFade();
     },
@@ -165,16 +168,34 @@ export default {
 }
 .modalOpenBlur {
     filter: blur(8px) grayscale(50%);
-    overflow: hidden;    
-}
-.full-opacity {
-    opacity: 1 !important;
+    overflow: hidden;
+    transform: scale(.98);    
 }
 .gallery {
     max-width: 1300px;
     margin: 0 auto;
-    /* position: relative; */
-    transition: all .3s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.galleryHeader {
+    font-family: 'Major Mono Display', monospace;
+    color: white;
+    font-size: 5rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #fff,
+                 0 0 20px #fff,
+                 0 0 30px #fff,
+                 0 0 40px #79E5CB,
+                 0 0 70px #79E5CB,
+                 0 0 80px #79E5CB,
+                 0 0 100px #79E5CB,
+                 0 0 150px #79E5CB;
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .galleryHeader {
+    font-size: 2.5rem;
+  }
 }
 
 </style>

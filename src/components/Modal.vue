@@ -61,12 +61,14 @@ export default {
     opacity: 0;
     pointer-events: none;
     z-index: 2;
-    transition: all .3s ease-in-out;
+    transition: all .2s ease-in-out;
+    transform: scale(1.5);
 }
 
 .fullOpacity {
     opacity: 1 !important;
     pointer-events: initial !important;
+    transform: scale(1) !important;
 }
 
 .theImage {
@@ -112,8 +114,10 @@ export default {
     -webkit-filter: blur(5px) grayscale(50%);
     filter: blur(5px) grayscale(50%);
     -webkit-transform: scale(0.9);
-    transform: scale(0.9);
+    transform: scale(0.9);    
 }
+
+
 
 #close {
     margin-bottom: 7px;

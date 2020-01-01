@@ -41,7 +41,7 @@ export default {
     // This timeout scolls to the top of the page just before the images load.
     setTimeout(function() {
       window.scrollTo(0, 0);
-    }, 300)
+    }, 200)
   }
 }
 
