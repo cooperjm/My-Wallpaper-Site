@@ -193,9 +193,18 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
-  .galleryHeader {
-    font-size: 2.5rem;
-  }
+    .galleryHeader {
+        font-size: 2.5rem;
+    }
+    
+}
+
+@media only screen and (max-width: 1024px) {
+    .modalOpenBlur {
+        filter: blur(8px) grayscale(50%);
+        overflow: hidden;
+        transform: scale(1);    
+    }
 }
 
 </style>

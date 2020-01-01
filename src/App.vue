@@ -55,6 +55,7 @@ body {
   background: #2c3e50;
   min-height: 200vh;
   position: relative;
+  overflow-x: hidden;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

@@ -62,7 +62,7 @@ export default {
     pointer-events: none;
     z-index: 2;
     transition: all .2s ease-in-out;
-    transform: scale(1.5);
+    transform: scale(1.2);
 }
 
 .fullOpacity {
@@ -105,8 +105,8 @@ export default {
     display: flex;
     justify-content: flex-end;  
     width: 100%;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 15px;    
+    padding-bottom: 25px; /* created a overflow-x issue. fixed with hidding overflow-x on body. will look at later. */
     width: 90vw;
 }
 
@@ -114,7 +114,7 @@ export default {
     -webkit-filter: blur(5px) grayscale(50%);
     filter: blur(5px) grayscale(50%);
     -webkit-transform: scale(0.9);
-    transform: scale(0.9);    
+    transform: scale(1);    
 }
 
 
