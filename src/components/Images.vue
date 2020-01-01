@@ -11,7 +11,9 @@
         :alt="altText" 
         :data-domain="domain"
         :data-source="source"
-        class="img-props contain opacity">
+        class="img-props contain opacity"
+        draggable="false"
+        >
         
     </div>
            

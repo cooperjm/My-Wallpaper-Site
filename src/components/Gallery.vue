@@ -20,7 +20,6 @@
             <Images v-for="(image, index) in imageList"
             :key="index"            
             :allData="image.data"
-            @source-image="getModalImage($event)"
             ></Images>            
             <Trigger @triggerIntersected="infiniteScroll" />
             
@@ -151,9 +150,11 @@ export default {
         this.$store.dispatch('getMoreImages');
         //this.fetchJSON();
         this.checkFade();
+        
     },
     updated() {
-        this.checkFade();        
+        this.checkFade();    
+        document.querySelector('.galleryHeader').style.opacity = 1;    
     },
     components: {
         Images,
@@ -177,7 +178,9 @@ export default {
     transition: all .2s ease-in-out;
 }
 .galleryHeader {
+    transition: all .5s ease-in-out;
     font-family: 'Major Mono Display', monospace;
+    opacity: 0;
     color: white;
     font-size: 5rem;
     font-weight: bold;
