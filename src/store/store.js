@@ -6,7 +6,6 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        imageData: {},
         toReturn: 30,
         numberOfImages: 0,
         after: '',
@@ -37,10 +36,6 @@ export const store = new Vuex.Store({
         getImages(state) {
             axios.get(state.initalUrl)
                 .then(function(response) {
-                    state.imageData = response.data;
-                    return response;
-                })
-                .then(function(response) {
                     state.numberOfImages = response.data.data.children.length;
                     state.after = response.data.data.after;
                     state.listOfImages = response.data.data.children;
@@ -68,10 +63,12 @@ export const store = new Vuex.Store({
                     console.log(error);
                 });
         },
+        clearListOfImages(state) {
+            state.listOfImages = [];
+        },
         imageWasClicked(state, payload) {
             state.imageClicked = true;
             state.clickedImageInfo = payload;
-            //console.log(payload);
         },
         modalOpen(state) {
             state.modalOpen = !state.modalOpen;
@@ -89,6 +86,9 @@ export const store = new Vuex.Store({
         },
         modalOpen(context) {
             context.commit('modalOpen');
+        },
+        clearListOfImages(context) {
+            context.commit('clearListOfImages');
         }
     }
 });

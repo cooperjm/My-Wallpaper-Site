@@ -36,8 +36,12 @@ export default {
     Trigger,
     Modal
   },
-  beforeMount() {
-    this.$store.dispatch('getImages');
+  created() {
+    // Had an bug where on reloading of the page the viewport would be at the bottom of the page.
+    // This timeout scolls to the top of the page just before the images load.
+    setTimeout(function() {
+      window.scrollTo(0, 0);
+    }, 300)
   }
 }
 

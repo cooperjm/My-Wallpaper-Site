@@ -11,9 +11,9 @@
             </div>
             <div class="modalButtons">
                 <a :href="url" target="_blank">
-                    <img id="download" src="src\assets\download.svg" alt="download" title="View">
+                    <img id="download" src="..\assets\download.svg" alt="download" title="View">
                 </a>
-                <img id="close" src="src\assets\close.svg" alt="close" title="Close"
+                <img id="close" src="..\assets\close.svg" alt="close" title="Close"
                 @click="closeClicked">
             </div>
         </div>

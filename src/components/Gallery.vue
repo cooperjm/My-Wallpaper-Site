@@ -1,9 +1,9 @@
 <template>
-        <div class="row gallery d-flex flex-row flex-wrap justify-content-around"
+        <div class="row gallery d-flex flex-row flex-wrap justify-content-around mt-5"
         :class="{modalOpenBlur: modalOpen}"
         >
             
-            <div class="col-12">
+            <!-- <div class="col-12">
                 <div class="row">
                     <div class="input-group mb-3 col-11 col-md-9 col-lg-6 mx-auto">
                         <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2" v-model="searchValue"
@@ -13,26 +13,15 @@
                         </div>
                     </div>
                 </div>
-            </div> 
-            <!-- <div class="col-12">
-                <button @click="moreImages">Add more</button>
-                <button @click="testButton">test</button>  
-            </div>    -->
+            </div>  -->
+            
             <Images v-for="(image, index) in imageList"
             :key="index"            
             :allData="image.data"
             @source-image="getModalImage($event)"
             ></Images>            
             <Trigger @triggerIntersected="infiniteScroll" />
-            <!-- <div id="wallpaperModal" :class="{'full-opacity': imageClicked}">
-                <div class="modalContainer">
-                    <div class="imageModal">
-                        <img :src="modalImageSource" :alt="modalAlt">
-                        <p style="font-size: 0">{{modalAlt}}</p> 
-                        
-                    </div>
-                </div>
-            </div> -->
+            
         </div>
 </template>
 
@@ -161,7 +150,7 @@ export default {
         this.checkFade();
     },
     updated() {
-        this.checkFade();
+        this.checkFade();        
     },
     components: {
         Images,
