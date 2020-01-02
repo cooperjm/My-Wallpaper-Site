@@ -10,11 +10,10 @@
                 >
                 <div class="modalButtons">
                     <a :href="url" target="_blank">
-                        <img id="download" src="..\assets\download.svg" alt="download" title="View">
+                        <i id="download" class="fas fa-search-plus" alt="download" title="View"></i>
                     </a>
-                    <img id="close" src="..\assets\close.svg" alt="close" title="Close"
-                    @click="closeClicked"
-                    >
+                    <i id="close" class="fas fa-times" alt="close" title="Close" @click="closeClicked"></i>
+                    
                 </div>             
             </div>
             
@@ -70,14 +69,20 @@ export default {
     opacity: 0;
     pointer-events: none;
     z-index: 2;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
-    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+            transform: scale(1.2);
 }
 
 .fullOpacity {
     opacity: 1 !important;
     pointer-events: initial !important;
-    transform: scale(1) !important;
+    -webkit-transform: scale(1) !important;
+        -ms-transform: scale(1) !important;
+            transform: scale(1) !important;
 }
 
 .theImage {
@@ -85,34 +90,51 @@ export default {
     max-height: 100%;
 }
 
-/* #wallpaperModal img:hover {
-     -webkit-filter: blur(5px) grayscale(80%);
-    filter: blur(2px) grayscale(90%);
-} */
-
 .modalContainer {
     width: 100%;
     height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     background: rgba(0, 0, 0, 0.51);
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
 }
 
 .imageModal {
     width: 90vw;
     height: 85vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .modalButtons {
     /* background-color: white; */
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;  
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;  
     width: 100%;
     padding-top: 15px;    
     padding-bottom: 15px; /* created a overflow-x issue. fixed with hidding overflow-x on body. will look at later. */
@@ -123,13 +145,22 @@ export default {
     -webkit-filter: blur(5px) grayscale(50%);
     filter: blur(5px) grayscale(50%);
     -webkit-transform: scale(0.9);
-    transform: scale(1);    
+    -ms-transform: scale(1);
+        transform: scale(1);    
 }
 
 
 
 #close {
-    margin-bottom: 7px;
+    margin-top: -5px;
     cursor: pointer;
+    color: white;
+    font-size: 2.5rem;
+}
+#download {
+    cursor: pointer;
+    color: white;
+    font-size: 2rem;
+    margin-right: 15px;
 }
 </style>

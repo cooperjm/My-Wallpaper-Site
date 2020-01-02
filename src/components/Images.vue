@@ -27,7 +27,7 @@
     .none {object-fit: none !important;}
     /* .m-height {height: 200px !important; max-width: calc(100% * (1/4));} */
     .m-height {max-height: 300px !important; flex-basis: 22%;}
-    .img-props {max-height: 100% !important; max-width: 100% !important;transition: all .6s ease-in-out;}
+    .img-props {max-height: 100% !important; max-width: 100% !important;transition: all .6s ease-in-out; cursor: pointer;}
     .container-bg {background: grey;}
 
 

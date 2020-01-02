@@ -168,16 +168,20 @@ export default {
     z-index: 10;
 }
 .modalOpenBlur {
-    filter: blur(8px) grayscale(50%);
+    -webkit-filter: blur(8px) grayscale(50%);
+            filter: blur(8px) grayscale(50%);
     overflow: hidden;
-    /* transform: scale(.98);     */
 }
 .gallery {
-    max-width: 1300px;
+    max-width: 1067px;
     margin: 0 auto;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
 }
 .galleryHeader {
+    -webkit-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
     font-family: 'Major Mono Display', monospace;
     opacity: 0;
@@ -201,11 +205,5 @@ export default {
     }
     
 }
-
-/* @media only screen and (max-width: 1024px) {
-    .modalOpenBlur {
-        transform: scale(1);    
-    }
-} */
 
 </style>
