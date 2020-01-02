@@ -5,6 +5,9 @@
            
         <Gallery></Gallery>
         <Modal></Modal>
+        <div id="toTopContainer">
+            <i id="toTop" class="fas fa-chevron-circle-up" @click="scrollTop"></i>
+        </div>
     </div>
       
       
@@ -28,7 +31,17 @@ export default {
     }
   },
   methods: {
-    
+    scrollTop() {
+        // window.scrollTo(0, 0);
+        const scrollToTop = () => {
+            const c = document.documentElement.scrollTop || document.body.scrollTop;
+            if (c > 0) {
+                window.requestAnimationFrame(scrollToTop);
+                window.scrollTo(0, c - c / 8);
+            }
+        };
+        scrollToTop();
+    }
   },
   components: {
     Images,
@@ -64,10 +77,17 @@ body {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  /* background: black; */
   width: 95%;
   margin: 0 auto;
+  position: relative;
 }
-
+#toTopContainer {
+    position: fixed;
+    top: 84%;
+    right: 3%;
+    font-size: 5rem;
+    color: rgba(209, 209, 209, .5);
+    cursor: pointer;
+}
 
 </style>

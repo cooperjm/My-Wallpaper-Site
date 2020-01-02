@@ -2,9 +2,10 @@
         <div class="row gallery d-flex flex-row flex-wrap justify-content-around mt-5"
         :class="{modalOpenBlur: modalOpen}"
         >
-            <div class="col-12">
+            <div class="col-12 pageHeader">
                 <h1 class="galleryHeader">Wallpapers</h1>
-            </div>   
+            </div>
+   
             <!-- <div class="col-12">
                 <div class="row">
                     <div class="input-group mb-3 col-11 col-md-9 col-lg-6 mx-auto">
@@ -198,10 +199,18 @@ export default {
                  0 0 150px #79E5CB;
     margin-bottom: 20px;
 }
+.pageHeader {
+    /* position: fixed;
+    background: #2c3e50;
+    top: 0;
+    padding-top: 30px;
+    padding-bottom: 30px; */
+}
 
 @media only screen and (max-width: 600px) {
     .galleryHeader {
         font-size: 2.5rem;
+        
     }
     
 }
