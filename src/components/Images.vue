@@ -107,7 +107,7 @@ export default {
         },
         source: function() {
             if (this.hasPreview) {
-                return unescape(this.allData.preview.images[0].source.url);
+                return this.allData.preview.images[0].source.url;
             } else {
                 return false;
             }

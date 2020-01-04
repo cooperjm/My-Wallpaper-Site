@@ -88,6 +88,9 @@ export default {
 .theImage {
     max-width: 100%;
     max-height: 100%;
+    -webkit-box-shadow: 0px 0px 114px -27px rgba(121,229,203,1);
+       -moz-box-shadow: 0px 0px 114px -27px rgba(121,229,203,1);
+            box-shadow: 0px 0px 114px -27px rgba(121,229,203,1);
 }
 
 .modalContainer {
@@ -141,6 +144,8 @@ export default {
     width: 90vw;
 }
 
+
+
 .modalOpen {
     -webkit-filter: blur(5px) grayscale(50%);
     filter: blur(5px) grayscale(50%);
@@ -152,15 +157,16 @@ export default {
 
 
 #close {
-    margin-top: -5px;
+    margin-top: 6px;
     cursor: pointer;
     color: white;
     font-size: 2.5rem;
 }
 #download {
+    margin-top: 10px;
     cursor: pointer;
     color: white;
     font-size: 2rem;
-    margin-right: 15px;
+    margin-right: 25px;
 }
 </style>

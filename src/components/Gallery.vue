@@ -148,7 +148,7 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('getMoreImages');
+        //this.$store.dispatch('getMoreImages');
         //this.fetchJSON();
         this.checkFade();
         

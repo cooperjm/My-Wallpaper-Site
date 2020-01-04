@@ -6,7 +6,7 @@
         <Gallery></Gallery>
         <Modal></Modal>
         <div id="toTopContainer">
-            <i id="toTop" class="fas fa-chevron-circle-up" @click="scrollTop"></i>
+            <i id="toTop" class="fas fa-chevron-circle-up" @click="scrollTop" title="Scroll To Top"></i>
         </div>
     </div>
       
