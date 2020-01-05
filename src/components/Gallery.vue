@@ -6,17 +6,17 @@
                 <h1 class="galleryHeader">Wallpapers</h1>
             </div>
    
-            <!-- <div class="col-12">
+            <div class="col-12">
                 <div class="row">
                     <div class="input-group mb-3 col-11 col-md-9 col-lg-6 mx-auto">
                         <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2" v-model="searchValue"
-                        @keyup.enter="searchWallpapers">
+                        @keyup.enter="searchPrep">
                         <div class="input-group-append">
-                            <button id="search" class="btn btn-info" type="button" @click="searchWallpapers">Search</button>
+                            <button id="search" class="btn btn-info" type="button" @click="searchPrep">Search</button>
                         </div>
                     </div>
                 </div>
-            </div>  -->
+            </div> 
             
             <Images v-for="(image, index) in imageList"
             :key="index"            
@@ -48,7 +48,6 @@ export default {
     },
     computed: {
         searchValueFormatted() {
-            //return this.searchValue.replace(' ', '+');
             return this.searchValue.split(" ").join("+").trim();
         },
         searchUrl() {
@@ -81,28 +80,8 @@ export default {
         }
     },
     methods: {
-        searchWallpapers() {
-            this.data = {};
-            this.count = 0;
-            this.imageList = {};
-            fetch(this.searchUrl)
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                this.data = data;
-                var listLength = data.data.children.length;
-                this.listLength = listLength;
-
-                for(var i = 0; i < listLength; i++ ) {                
-                  this.imageList[i] = data.data.children[i];
-                }
-                
-                this.after = data.data.after;
-                this.count += this.toReturn;
-                this.isSearched = true;
-                this.$forceUpdate(); 
-            });      
+        searchPrep() {
+            this.$store.dispatch('clearListOfImages');
         },
         searchMoreImages() {
             fetch(this.searchMoreUrl)
@@ -127,12 +106,11 @@ export default {
             console.log(this.searchUrl);
         },
         infiniteScroll() {
-            if (this.isSearched) {
-                this.searchMoreImages();
-                console.log('searched');
+            if (this.$store.getters.searched) {
+                this.$store.dispatch('searchValue', this.searchValueFormatted);
+                
             } else {
                 this.$store.dispatch('getMoreImages');
-                console.log('normal');
             }
         },
         checkFade() {
@@ -148,8 +126,6 @@ export default {
         }
     },
     mounted() {
-        //this.$store.dispatch('getMoreImages');
-        //this.fetchJSON();
         this.checkFade();
         
     },
@@ -199,13 +175,7 @@ export default {
                  0 0 150px #79E5CB;
     margin-bottom: 20px;
 }
-.pageHeader {
-    /* position: fixed;
-    background: #2c3e50;
-    top: 0;
-    padding-top: 30px;
-    padding-bottom: 30px; */
-}
+
 
 @media only screen and (max-width: 600px) {
     .galleryHeader {

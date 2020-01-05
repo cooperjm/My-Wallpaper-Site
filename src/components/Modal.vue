@@ -2,9 +2,9 @@
     <div id="wallpaperModal"
     :class="{fullOpacity: modalOpen}"
     >
-        <div class="modalContainer">
+        <div class="modalContainer" @click="closeClicked">
             <div class="imageModal">                
-                <img class="theImage" 
+                <img id="image" class="theImage" 
                 :src="modalImage" 
                 :alt="alt"
                 >
@@ -12,7 +12,7 @@
                     <a :href="url" target="_blank">
                         <i id="download" class="fas fa-search-plus" alt="download" title="View"></i>
                     </a>
-                    <i id="close" class="fas fa-times" alt="close" title="Close" @click="closeClicked"></i>
+                    <i id="close" class="fas fa-times" alt="close" title="Close"></i>
                     
                 </div>             
             </div>
@@ -31,14 +31,19 @@ export default {
         }
     },
     methods: {
-        closeClicked: function() {
-            this.$store.dispatch('modalOpen');
-            // This is to insert the loading icon after the modal has closed.
-            // Inside setTimeout was out of scope for "this", which is why self is equal to "this"
-            let self = this;
-            setTimeout(function() {                
-                self.$store.dispatch('insertLoadingIcon', self.loadingIcon);
-            }, 200);                     
+        closeClicked: function(event) {
+            
+            if (event.target.id == 'image' || event.target.id == 'download') {
+                //console.log('stay open');
+            } else {
+                this.$store.dispatch('modalOpen');
+                // This is to insert the loading icon after the modal has closed.
+                // Inside setTimeout was out of scope for "this", which is why self is equal to "this"
+                let self = this;
+                setTimeout(function() {                
+                    self.$store.dispatch('insertLoadingIcon', self.loadingIcon);
+                }, 200);
+            }                   
         }
     },
     computed: {
@@ -88,6 +93,7 @@ export default {
 .theImage {
     max-width: 100%;
     max-height: 100%;
+    background-color: rgba(121,229,203,.12);
     -webkit-box-shadow: 0px 0px 114px -27px rgba(121,229,203,1);
        -moz-box-shadow: 0px 0px 114px -27px rgba(121,229,203,1);
             box-shadow: 0px 0px 114px -27px rgba(121,229,203,1);

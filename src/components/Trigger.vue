@@ -16,8 +16,8 @@ export default {
             default: function() {
                 return {
                     root: null,
-                    threshold: "0",
-                    rootMargin: '600px'
+                    threshold: ".5",
+                    rootMargin: '300px'
                 }
             }
         }
