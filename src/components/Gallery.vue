@@ -17,12 +17,15 @@
                     </div>
                 </div>
             </div> 
-            
-            <Images v-for="(image, index) in imageList"
-            :key="index"            
-            :allData="image.data"
-            ></Images>            
+
+            <div style="columns: 3 300px; column-gap: 1rem;">
+                <Images v-for="(image, index) in imageList"
+                :key="index"            
+                :allData="image.data"
+                ></Images>
+            </div>
             <Trigger @triggerIntersected="infiniteScroll" />
+            
             
         </div>
 </template>

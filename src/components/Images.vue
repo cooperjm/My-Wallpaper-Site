@@ -1,6 +1,6 @@
 <template>
     
-    <div 
+    <!-- <div 
     class="m-3 d-flex justify-content-center m-height" 
     v-if="(hasPreview && !isRequest && modalImage)"
     >
@@ -15,7 +15,23 @@
         draggable="false"
         >
         
-    </div>
+    </div> -->
+     
+    
+    
+        
+        <img
+        @click="clicked"
+        :src="preview" 
+        :alt="altText" 
+        :data-domain="domain"
+        :data-source="source"
+        class="img-props contain m-height opacity"
+        draggable="false"
+        v-if="(hasPreview && !isRequest && modalImage)"
+        >
+        
+    
            
 </template>
 
@@ -25,9 +41,9 @@
     .cover {object-fit: cover !important;}
     .scale-down {object-fit: scale-down !important;}
     .none {object-fit: none !important;}
-    /* .m-height {height: 200px !important; max-width: calc(100% * (1/4));} */
-    .m-height {max-height: 300px !important; flex-basis: 22%;}
-    .img-props {max-height: 100% !important; max-width: 100% !important;transition: all .6s ease-in-out; cursor: pointer;}
+    /* .m-height {height: 200px !important; width: calc(100% * (1/4));} */
+    /* .m-height {max-height: 300px !important; flex-basis: 22%;} */
+    .img-props {width: 100%; transition: all .6s ease-in-out; cursor: pointer; margin-bottom: 1em;}
     .container-bg {background: grey;}
 
 
